@@ -1,5 +1,9 @@
 package com.wat.springmvc.web.service;
 
-public interface IUserService {
+import com.wat.springmvc.web.entity.User;
 
+public interface IUserService {
+	
+	
+	public User getUserById(Long id);
 }
