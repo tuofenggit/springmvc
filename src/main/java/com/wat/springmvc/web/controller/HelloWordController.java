@@ -1,7 +1,7 @@
 package com.wat.springmvc.web.controller;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wat.springmvc.web.entity.User;
 import com.wat.springmvc.web.service.IUserService;
-
 
 /**
  * 
@@ -23,12 +22,11 @@ import com.wat.springmvc.web.service.IUserService;
 @Controller
 @RequestMapping("/hello")
 public class HelloWordController {
-	
-	private static final Logger logger = LoggerFactory.getLogger(HelloWordController.class);
-    
+
+	static Logger logger = LogManager.getLogger(LogManager.ROOT_LOGGER_NAME);
 	@Autowired
-	IUserService userService; 
-	
+	IUserService userService;
+
 	/**
 	 * json 返回测试
 	 * 
@@ -38,10 +36,10 @@ public class HelloWordController {
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public @ResponseBody User First(@PathVariable(value = "id") Long id) {
 		System.out.println("111111111" + id);
-		
+
 		logger.info("测试logger...");
 		logger.error("测试logger...");
-		
+
 		return userService.getUserById(id);
 	}
 
