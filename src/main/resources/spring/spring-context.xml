@@ -9,9 +9,6 @@
     <context:component-scan base-package="com.wat.springmvc.web.service"/>
     <context:component-scan base-package="com.wat.springmvc.web.mapper"/>
 
-    <!-- druid监控配置
-    <import resource="classpath:spring/spring-context-druid-stat.xml"/>
-     -->
     <!-- 事务管理配置 -->
     	<import resource="classpath:spring/spring-context-tx.xml" />
 

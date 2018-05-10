@@ -47,5 +47,5 @@
                       expression="(execution(* com.wat.springmvc.web.service.*.*(..)))"/>
         <aop:advisor advice-ref="txAdvice" pointcut-ref="serviceOperation"/>
     </aop:config>
-
+    <import resource="classpath:spring/applicationProvider.xml"/>
 </beans>

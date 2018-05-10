@@ -1,21 +1,22 @@
 package com.wat.springmvc.web.service.impl;
 
+import com.wat.springmvc.web.entity.UserInfo;
+import com.wat.springmvc.web.mapper.UserInfoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.wat.springmvc.web.entity.User;
-import com.wat.springmvc.web.mapper.UserMapper;
+
 import com.wat.springmvc.web.service.IUserService;
 
 @Service
 public class UserServiceImpl implements IUserService {
     
 	@Autowired
-	UserMapper mapper;
+	UserInfoMapper userInfoMapper;
 	
-	public User getUserById(Long id) {
+	public UserInfo getUserById(Integer id) {
 		// TODO Auto-generated method stub
-		return mapper.selectByPrimaryKey(id);
+		return userInfoMapper.selectByPrimaryKey(id);
 	}
 
 }
