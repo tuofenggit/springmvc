@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wat.springmvc.web.service.IUserService;
+import redis.clients.jedis.ShardedJedisPool;
 
 
 /**
@@ -27,6 +28,11 @@ public class HelloWordController {
     @Autowired
     IUserService userService;
 
+    //注入ShardedJedisPool
+    @Autowired
+    private ShardedJedisPool shardedJedisPool;
+
+
     /**
      * json 返回测试
      *
@@ -40,6 +46,10 @@ public class HelloWordController {
 
         logger.info("测试logger...");
         logger.error("测试logger...");
+
+        System.out.println("AA::::"+ shardedJedisPool.getResource().get("AA"));
+
+
         return userService.getUserById(id);
     }
 

@@ -7,6 +7,7 @@
 
     <!-- 自动扫描 -->
     <context:component-scan base-package="com.wat.springmvc.web.service"/>
+    <context:component-scan base-package="com.wat.springmvc.web.controller"/>
     <context:component-scan base-package="com.wat.springmvc.web.mapper"/>
 
     <!-- 事务管理配置 -->
