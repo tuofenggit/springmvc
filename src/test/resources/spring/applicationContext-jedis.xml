@@ -20,12 +20,12 @@
         <property name="testOnBorrow" value="${redis.testOnBorrow}"/>
     </bean>
     <!--
-    <bean id="jedisPool" class="redis.clients.jedis.JedisPool">
+    <bean id="jedisPool" class="redisutils.clients.jedis.JedisPoolUtil">
         <constructor-arg index="0" ref="jedisPoolConfig"/>
-        <constructor-arg index="1" value="${redis.host}"/>
-        <constructor-arg index="2" value="${redis.port}" type="int"/>
-        <constructor-arg index="3" value="${redis.timeout}" type="int"/>
-        <constructor-arg index="4" value="${redis.auth}"/>
+        <constructor-arg index="1" value="${redisutils.host}"/>
+        <constructor-arg index="2" value="${redisutils.port}" type="int"/>
+        <constructor-arg index="3" value="${redisutils.timeout}" type="int"/>
+        <constructor-arg index="4" value="${redisutils.auth}"/>
     </bean>
     -->
 
