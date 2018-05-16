@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
+import redis.clients.jedis.Jedis;
 import redis.clients.jedis.ShardedJedis;
 import redis.clients.jedis.ShardedJedisPool;
 
@@ -64,7 +65,7 @@ public class JedisTest {
         System.out.println("删除key：" + shardedJedis.del("str1"));
         System.out.println("判断key 是否存在：：" + shardedJedis.exists("str1"));
         System.out.println("key 不存在时返回的信息：：" + shardedJedis.get("keynoexits"));
-
+        String rs = shardedJedis.set("LOCK:TestKey", "value", "NX", "EX", 1000);
 
         System.out.println("*********************** Hash **************************");
         logger.info("hash set :::" + shardedJedis.hset("hashKey", "a", "1"));
@@ -108,13 +109,6 @@ public class JedisTest {
         logger.info("在列表中添加一个或多个值::"+shardedJedis.rpush("aaList","1","dd"));
         logger.info("为已存在的列表添加值::"+shardedJedis.rpushx("aList","22"));
         logger.info("为已存在的列表添加值(不存在时)::"+shardedJedis.rpushx("acList","12"));
-
-
-
-
-
-
-
 
 
         System.out.println("*********************** Set **************************");

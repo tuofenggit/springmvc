@@ -1,14 +1,16 @@
 package com.wat.springmvc.web.utils.redisutils;
 
+import org.springframework.stereotype.Component;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.Pipeline;
 
 /**
  *  基础redis
  */
+@Component
 public class JedisUtil {
 
-    public static Jedis jedis;
+    private static Jedis jedis;
 
     private JedisUtil() {
     }
