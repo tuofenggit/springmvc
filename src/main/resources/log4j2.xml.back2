@@ -6,7 +6,7 @@ monitorinterval用于指定log4j自动重新配置的监测间隔时间，单位
 
     <properties>
         <property name="LOG_HOME">F:/opt/logs/springmvc</property>
-        <property name="PATTERN">%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%t] %logger{36} - %msg%n</property>
+        <property name="PATTERN">%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n</property>
     </properties>
 
     <!--
@@ -36,8 +36,8 @@ monitorinterval用于指定log4j自动重新配置的监测间隔时间，单位
             <PatternLayout pattern="${PATTERN}"/>
         </Console>
 
-        <RollingFile name="InfoRollingFile" fileName="${LOG_HOME}-info-winchannel.log"
-                     filePattern="${LOG_HOME}-info-winchannel.log.%d{yyyy-MM-dd}" append="true"
+        <RollingFile name="ControllerInfo" fileName="${LOG_HOME}-info-controller.log"
+                     filePattern="${LOG_HOME}-info-controller.log.%d{yyyy-MM-dd}" append="true"
                      bufferedIO="true">
 
             <PatternLayout pattern="${PATTERN}"/>
@@ -53,6 +53,25 @@ monitorinterval用于指定log4j自动重新配置的监测间隔时间，单位
             </Policies>
         </RollingFile>
 
+
+        <RollingFile name="ServiceInfo" fileName="${LOG_HOME}-info-Service.log"
+                     filePattern="${LOG_HOME}-info-Service.log.%d{yyyy-MM-dd}" append="true"
+                     bufferedIO="true">
+
+            <PatternLayout pattern="${PATTERN}"/>
+            <Filters>
+                <!--控制台只输出level及以上级别的信息（onMatch），其他的直接拒绝（onMismatch,如果onMismatch 也是 ACCEPT 则可以打印出 比他级别低的日志）
+                  组合使用 Filter 可以使 ERROR的 信息不在info 中显示。
+                -->
+                <ThresholdFilter level="ERROR" onMatch="DENY" onMismatch="NEUTRAL"/>
+                <ThresholdFilter level="INFO" onMatch="ACCEPT" onMismatch="DENY"/>
+            </Filters>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+            </Policies>
+        </RollingFile>
+
+
         <RollingFile name="ErrorRollingFile" fileName="${LOG_HOME}-error-winchannel.log"
                      filePattern="${LOG_HOME}-error-winchannel.log.%d{yyyy-MM-dd}" append="true"
                      bufferedIO="true">
@@ -64,11 +83,25 @@ monitorinterval用于指定log4j自动重新配置的监测间隔时间，单位
                 <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
             </Policies>
         </RollingFile>
+        <!--
+        <RollingFile name="ErrorRollingFile" fileName="${LOG_HOME}-error-winchannel.log"
+                     filePattern="log/$${date:yyyy-MM}/app-%d{MM-dd-yyyy}-%i.log.gz" append="true"
+                     bufferedIO="true">
+            <PatternLayout pattern="${PATTERN}"/>
+            <Filters>
+                <ThresholdFilter level="ERROR" onMatch="ACCEPT" onMismatch="DENY"/>
+            </Filters>
+            SizeBasedTriggeringPolicy size="50MB"/>
+                 DefaultRolloverStrategy属性如不设置，则默认为最多同一文件夹下7个文件，这里设置了20
+             <DefaultRolloverStrategy max="20"/>
+        </RollingFile>
+        -->
+
 
         <Async name="AsyncAppender" includeLocation="true">
-            <AppenderRef ref="InfoRollingFile"/>
+            <AppenderRef ref="ServiceInfo"/>
             <AppenderRef ref="ErrorRollingFile"/>
-            <AppenderRef ref="Console"/>
+            <AppenderRef ref="ControllerInfo"/>
         </Async>
 
     </Appenders>
@@ -76,9 +109,30 @@ monitorinterval用于指定log4j自动重新配置的监测间隔时间，单位
 
     <!--定义logger，只有定义了 Loggers 并引入的appender，appender才会生效-->
     <Loggers>
-        <Root level="DEBUG">
+
+        <!-- 父日志输出对象
+         additivity="false"表示在该logger中输出的日志不会再延伸到父层logger
+         -->
+        <logger level="INFO"  name="com.wat.springmvc.web.service.impl" additivity="false">
+            <AppenderRef ref="ServiceInfo"/>
+            <AppenderRef ref="Console"/>
+        </logger>
+
+        <logger level="INFO"  name="com.wat.springmvc.web.controller" additivity="false">
+            <AppenderRef ref="ControllerInfo"/>
+            <AppenderRef ref="Console"/>
+        </logger>
+
+        <logger level="INFO"  name="com.wat.springmvc.web" additivity="false">
+            <AppenderRef ref="ErrorRollingFile"/>
+            <AppenderRef ref="Console"/>
+        </logger>
+
+        <Root level="INFO">
+            <AppenderRef ref="Console"/>
             <AppenderRef ref="AsyncAppender"/>
         </Root>
+
     </Loggers>
 
 </Configuration>

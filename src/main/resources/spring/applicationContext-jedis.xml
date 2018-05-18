@@ -34,12 +34,14 @@
         <constructor-arg index="0" ref="jedisPoolConfig"/>
         <constructor-arg index="1">
             <list>
+
                 <!--集群就是多个bean -->
                 <bean class="redis.clients.jedis.JedisShardInfo">
                     <constructor-arg name="host" value="${redis.host}"/>
                     <constructor-arg name="port" value="${redis.port}"/>
                     <property name="soTimeout" value="${redis.timeout}"/>
                 </bean>
+
             </list>
         </constructor-arg>
     </bean>
