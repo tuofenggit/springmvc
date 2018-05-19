@@ -10,11 +10,11 @@ public class MyThreadPool {
 
     private static AtomicInteger integer = new AtomicInteger(0);
 
-    private static int corePoolSize = 5;
-    private static int maximumPoolSize = 10;
+    private static int corePoolSize = 1;
+    private static int maximumPoolSize = 2;
     private static long keepAliveTime = 60;
     private static TimeUnit unit = TimeUnit.SECONDS;
-    private static BlockingQueue<Runnable> workQueue = new LinkedBlockingDeque<>(5);
+    private static BlockingQueue<Runnable> workQueue = new LinkedBlockingDeque<>(10);
 
     private static RejectedExecutionHandler handler = new RejectedExecutionHandler() {
         @Override

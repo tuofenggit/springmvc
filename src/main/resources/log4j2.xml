@@ -26,7 +26,6 @@ monitorinterval用于指定log4j自动重新配置的监测间隔时间，单位
      %M : 日志输出所在方法名
      hostName : 本地机器名
      hostAddress : 本地ip地址
-
      -->
     <Appenders>
         <!--
@@ -68,7 +67,6 @@ monitorinterval用于指定log4j自动重新配置的监测间隔时间，单位
         <Async name="AsyncAppender" includeLocation="true">
             <AppenderRef ref="InfoRollingFile"/>
             <AppenderRef ref="ErrorRollingFile"/>
-            <AppenderRef ref="Console"/>
         </Async>
 
     </Appenders>
@@ -76,8 +74,9 @@ monitorinterval用于指定log4j自动重新配置的监测间隔时间，单位
 
     <!--定义logger，只有定义了 Loggers 并引入的appender，appender才会生效-->
     <Loggers>
-        <Root level="DEBUG">
+        <Root level="info">
             <AppenderRef ref="AsyncAppender"/>
+            <AppenderRef ref="Console"/>
         </Root>
     </Loggers>
 
