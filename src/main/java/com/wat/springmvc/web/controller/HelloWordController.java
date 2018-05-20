@@ -1,8 +1,7 @@
 package com.wat.springmvc.web.controller;
 
 import com.wat.springmvc.web.entity.UserInfo;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,7 +21,7 @@ import redis.clients.jedis.ShardedJedisPool;
 @Controller
 @RequestMapping("/hello")
 public class HelloWordController {
-    Logger logger = LogManager.getLogger(HelloWordController.class);
+    private Logger logger=Logger.getLogger(this.getClass());
     @Autowired
     IUserService userService;
 

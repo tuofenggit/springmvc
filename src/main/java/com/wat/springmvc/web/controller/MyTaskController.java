@@ -2,8 +2,7 @@ package com.wat.springmvc.web.controller;
 
 import com.wat.springmvc.web.service.DemoService;
 import com.wat.springmvc.web.task.MyThreadPool;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -12,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/task")
 public class MyTaskController {
-    Logger logger = LogManager.getLogger(MyTaskController.class);
+    private Logger logger=Logger.getLogger(this.getClass());
 
     @Autowired
     DemoService demoService;
