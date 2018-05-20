@@ -1,5 +1,6 @@
 package com.wat.springmvc.web.service.impl;
 
+import com.wat.springmvc.web.annotation.MyAnnotation;
 import com.wat.springmvc.web.controller.MyTaskController;
 import com.wat.springmvc.web.entity.UserInfo;
 import com.wat.springmvc.web.mapper.UserInfoMapper;
@@ -19,6 +20,7 @@ public class UserServiceImpl implements IUserService {
     @Autowired
     UserInfoMapper userInfoMapper;
 
+    @MyAnnotation(tableName = "zhangsan")
     public UserInfo getUserById(Integer id) {
         // TODO Auto-generated method stub
         logger.info("测试分包");

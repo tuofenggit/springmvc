@@ -8,5 +8,6 @@ import java.lang.annotation.*;
 @Documented
 public @interface MyAnnotation {
     String tableName() default "";
+    int num() default  0;
 
 }

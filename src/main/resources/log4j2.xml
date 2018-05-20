@@ -69,6 +69,7 @@ monitorinterval用于指定log4j自动重新配置的监测间隔时间，单位
             <AppenderRef ref="InfoRollingFile"/>
             <AppenderRef ref="ErrorRollingFile"/>
             <AppenderRef ref="Console"/>
+
         </Async>
 
     </Appenders>
@@ -78,7 +79,10 @@ monitorinterval用于指定log4j自动重新配置的监测间隔时间，单位
     <Loggers>
         <Root level="DEBUG">
             <AppenderRef ref="AsyncAppender"/>
+            <dependency org="org.apache.logging.log4j" name="log4j-api" rev="2.8.1" />
+            <dependency org="org.apache.logging.log4j" name="log4j-core" rev="2.8.1" />
         </Root>
+        <logger name="com.alibaba.dubbo" level="error" additivity="false"/>
     </Loggers>
 
 </Configuration>
